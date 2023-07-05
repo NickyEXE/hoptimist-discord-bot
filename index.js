@@ -61,9 +61,12 @@ client.on("messageCreate", (message) => {
       .then(res => reply(message, res))
   } else if (message.content.startsWith(prefix + " ")) {
     var beerType = message.content.split("!beers ")[1];
-    var fullBeerMenu = fetch("https://hopto-scraper-1155c8982255.herokuapp.com/beers").json()
-    var newBeerMenu = createBeerBlob(fullBeerMenu, beerType)
-    reply(message, newBeerMenu)
+    fetch("https://hopto-scraper-1155c8982255.herokuapp.com/beers")
+    .then(res => res.json())
+    .then(fullBeerMenu => {
+      const newBeerMenu = createBeerBlob(fullBeerMenu, beerType)
+      reply(message, newBeerMenu)
+    })
   }
 })
 
