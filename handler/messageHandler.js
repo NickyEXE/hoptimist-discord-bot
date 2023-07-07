@@ -8,7 +8,6 @@ const messageHandler = (message) => {
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
   const { actionType, payload } = messageToAction(message);
-  console.log("payload", payload);
   switch (actionType) {
     case "beers": {
       BeerService.getBeers(payload).then((beers) =>
