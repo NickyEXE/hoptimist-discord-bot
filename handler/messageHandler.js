@@ -10,6 +10,12 @@ const messageHandler = (message) => {
   const { actionType, payload } = messageToAction(message);
   switch (actionType) {
     case "beers": {
+      BeerService.getBeers(payload).then((beers) =>
+        new BeerList(beers, message).replyToMessage()
+      );
+      break;
+    }
+    case "drafts": {
       BeerService.getDrafts(payload).then((beers) =>
         new BeerList(beers, message).replyToMessage()
       );

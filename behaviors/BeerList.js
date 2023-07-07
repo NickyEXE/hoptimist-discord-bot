@@ -5,13 +5,13 @@ export default class BeerList {
   }
 
   replyToMessage = () => {
-    if (this.beers.on_tap) {
+    if (this.beers.menu) {
       this.message.channel.send("On Tap:");
-      this.sendMessage(this.beers.on_tap);
+      this.sendMessage(this.beers.menu);
     }
-    if (this.beers.on_deck) {
+    if (this.beers.on_deck_menu) {
       this.message.channel.send("On Deck:");
-      this.sendMessage(this.beers.on_deck);
+      this.sendMessage(this.beers.on_deck_menu);
     }
     if (this.beers.cans) {
       this.message.channel.send("Cans:");
