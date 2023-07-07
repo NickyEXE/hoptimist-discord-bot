@@ -1,5 +1,5 @@
 import BeerService from "../requests/beerService.js";
-import BeerList from "../behaviors/beerList.js";
+import BeerList from "../behaviors/BeerList.js";
 
 const prefix = "!";
 // all prompts to discord bot must start with an "!".
