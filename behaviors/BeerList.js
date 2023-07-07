@@ -21,16 +21,20 @@ export default class BeerList {
 
   sendMessage = (beers) => {
     // messages to channel must be less than 2000 characters
-    const bullets = this.menuToBullets(beers);
-    let reply = "";
-    bullets.forEach((bullet) => {
-      if (reply.length + bullet.length > 1750) {
-        this.message.channel.send(reply);
-        reply = "";
-      }
-      reply += `${"\n" + bullet}`;
-    });
-    this.message.channel.send(reply);
+    if (beers.length === 0) {
+      this.message.channel.send("No beers match your search");
+    } else {
+      const bullets = this.menuToBullets(beers);
+      let reply = "";
+      bullets.forEach((bullet) => {
+        if (reply.length + bullet.length > 1750) {
+          this.message.channel.send(reply);
+          reply = "";
+        }
+        reply += `${"\n" + bullet}`;
+      });
+      reply && this.message.channel.send(reply);
+    }
   };
 
   menuToBullets = (beers) => beers.map(this.dataToBullet);
