@@ -30,9 +30,15 @@ const messageHandler = (message) => {
     }
     case "cancel": {
       new MentionedUserActions(message).cancel();
+      break;
     }
     case "cancellation_status": {
       new MentionedUserActions(message).getCancelStatus();
+      break;
+    }
+    case "cancellation_leaderboard": {
+      new MentionedUserActions(message).getLeaderboard();
+      break;
     }
   }
 };

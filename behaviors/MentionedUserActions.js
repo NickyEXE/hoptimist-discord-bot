@@ -31,16 +31,35 @@ export default class MentionedUserActions {
   };
 
   getCancelStatus = () => {
-    const member = new DiscordMember(this.mentionedUser);
-    console.log("you are here");
-    UserService.getCancelStatus(this.mentionedUser.id).then((res) => {
+    const member = new DiscordMember(this.mentionedUser).identifiers;
+    if (!member.discord_id) {
+      this.message.channel.send(
+        "Please tag the user you wish to find the cancellation status of."
+      );
+    } else {
+      UserService.getCancelStatus(this.mentionedUser.id).then((res) => {
+        if (res.messages) {
+          res.messages.forEach((message) => {
+            this.message.channel.send(message);
+          });
+        } else {
+          this.message.channel.send(
+            `Something went wrong and we couldn't find data on ${member.username}.`
+          );
+        }
+      });
+    }
+  };
+
+  getLeaderboard = () => {
+    UserService.getCancellationLeaderboard().then((res) => {
       if (res.messages) {
         res.messages.forEach((message) => {
           this.message.channel.send(message);
         });
       } else {
         this.message.channel.send(
-          `Something went wrong and we couldn't find data on ${member.username}.`
+          `Something went wrong and we couldn't find the leaderboard.`
         );
       }
     });
