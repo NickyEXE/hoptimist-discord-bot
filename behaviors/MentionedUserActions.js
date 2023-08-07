@@ -29,4 +29,20 @@ export default class MentionedUserActions {
       });
     }
   };
+
+  getCancelStatus = () => {
+    const member = new DiscordMember(this.mentionedUser);
+    console.log("you are here");
+    UserService.getCancelStatus(this.mentionedUser.id).then((res) => {
+      if (res.messages) {
+        res.messages.forEach((message) => {
+          this.message.channel.send(message);
+        });
+      } else {
+        this.message.channel.send(
+          `Something went wrong and we couldn't find data on ${member.username}.`
+        );
+      }
+    });
+  };
 }

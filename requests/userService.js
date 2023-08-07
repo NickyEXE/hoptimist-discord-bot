@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-const API = "https://hopto-scraper-1155c8982255.herokuapp.com";
+const API = "http://localhost:3000";
 
 export default class UserService {
   static cancelUser = (payload) =>
@@ -10,4 +10,7 @@ export default class UserService {
       },
       body: JSON.stringify(payload),
     }).then((res) => res.json());
+
+  static getCancelStatus = (id) =>
+    fetch(`${API}/users/${id}/cancels`).then((res) => res.json());
 }

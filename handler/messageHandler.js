@@ -31,6 +31,9 @@ const messageHandler = (message) => {
     case "cancel": {
       new MentionedUserActions(message).cancel();
     }
+    case "cancellation_status": {
+      new MentionedUserActions(message).getCancelStatus();
+    }
   }
 };
 
