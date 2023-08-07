@@ -1,5 +1,6 @@
 import BeerService from "../requests/beerService.js";
 import BeerList from "../behaviors/BeerList.js";
+import MentionedUserActions from "../behaviors/MentionedUserActions.js";
 
 const prefix = "!";
 // all prompts to discord bot must start with an "!".
@@ -25,6 +26,18 @@ const messageHandler = (message) => {
       BeerService.getCans(payload).then((beers) =>
         new BeerList(beers, message).replyToMessage()
       );
+      break;
+    }
+    case "cancel": {
+      new MentionedUserActions(message).cancel();
+      break;
+    }
+    case "cancellation_status": {
+      new MentionedUserActions(message).getCancelStatus();
+      break;
+    }
+    case "cancellation_leaderboard": {
+      new MentionedUserActions(message).getLeaderboard();
       break;
     }
   }
