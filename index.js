@@ -10,7 +10,6 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
   ],
 });
-
-client.on("messageCreate", messageHandler);
-
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN).then(() => {
+  client.on("messageCreate", messageHandler);
+});
