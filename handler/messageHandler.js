@@ -40,6 +40,9 @@ const messageHandler = (message) => {
       new MentionedUserActions(message).getLeaderboard();
       break;
     }
+    case "uncancel": {
+      new MentionedUserActions(message).selfCancel();
+    }
   }
 };
 
