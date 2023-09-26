@@ -2,13 +2,14 @@ import BeerService from "../requests/beerService.js";
 import BeerList from "../behaviors/BeerList.js";
 import MentionedUserActions from "../behaviors/MentionedUserActions.js";
 import TriggeredResponses from "../behaviors/TriggeredResponses.js";
+import Hal from "../behaviors/Hal.js";
 
 const prefix = "!";
 // all prompts to discord bot must start with an "!".
 // the format for a discord prompt is !<action> <payload>
 const messageHandler = (message) => {
   if (message.author.bot) return;
-  new TriggeredResponses(message).respond();
+  new Hal(message).handle();
   if (!message.content.startsWith(prefix)) return;
   const { actionType, payload } = messageToAction(message);
   switch (actionType) {
