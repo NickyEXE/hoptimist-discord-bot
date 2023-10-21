@@ -7,18 +7,28 @@ export default class TriggeredResponses {
     this.username = discordMember.username;
   }
 
-  respond = () => {
-    Object.keys(this.triggers()).forEach((trigger) => {
+  getTriggeredResponses = () => {
+    return Object.keys(this.triggers()).map((trigger) => {
       if (this.content.toLowerCase().includes(trigger)) {
         const possibleResponses = this.triggers()[trigger];
         const response =
           possibleResponses[
             Math.floor(Math.random() * possibleResponses.length)
           ];
-        this.message.channel.send(response);
+        return response
       }
-    });
+    }).filter((val => !!val));
+  }
+
+  shouldRespond = () => {
+    if (this.getTriggeredResponses().length > 0){
+      return true
+    }
   };
+
+  respond = () => {
+    this.getTriggeredResponses().forEach(response => this.message.channel.send(response))
+  }
 
   triggers = () => ({
     bot: this.responses("robot"),
