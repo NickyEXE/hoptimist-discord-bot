@@ -4,6 +4,7 @@ import MentionedUserActions from "../behaviors/MentionedUserActions.js";
 import TriggeredResponses from "../behaviors/TriggeredResponses.js";
 import PromptHandler from "../behaviors/PromptHandler.js";
 import Hal from "../behaviors/Hal.js";
+import Help from "../behaviors/Help.js";
 
 const prefix = "!";
 // all prompts to discord bot must start with an "!".
@@ -59,6 +60,9 @@ const messageHandler = (message) => {
     case "set_personality": {
       new PromptHandler(message).setPersonality();
       break;
+    }
+    case "help": {
+      new Help(message).help()
     }
   }
 };
