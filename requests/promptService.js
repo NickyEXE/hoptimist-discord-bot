@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
-// const API = "https://hopto-scraper-1155c8982255.herokuapp.com";
-const API = "http://localhost:3000/"
+const API = "https://hopto-scraper-1155c8982255.herokuapp.com";
+// const API = "http://localhost:3000/"
 export default class PromptService {
   static createPrompt = (name, prompt) =>
     fetch(`${API}/prompts`, {
