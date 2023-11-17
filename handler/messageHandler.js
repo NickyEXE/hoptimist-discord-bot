@@ -2,6 +2,7 @@ import BeerService from "../requests/beerService.js";
 import BeerList from "../behaviors/BeerList.js";
 import MentionedUserActions from "../behaviors/MentionedUserActions.js";
 import TriggeredResponses from "../behaviors/TriggeredResponses.js";
+import PromptHandler from "../behaviors/PromptHandler.js";
 import Hal from "../behaviors/Hal.js";
 
 const prefix = "!";
@@ -45,6 +46,9 @@ const messageHandler = (message) => {
     }
     case "uncancel": {
       new MentionedUserActions(message).selfCancel();
+    }
+    case "create_prompt": {
+      new PromptHandler(message).createPrompt();
     }
   }
 };
