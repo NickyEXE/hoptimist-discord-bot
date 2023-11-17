@@ -8,8 +8,9 @@ export default class Hal {
   }
 
   handle = () => {
-    HalService.snarkyResponse(this.content).then(res => {
-      if (res.has_response){
+    const shouldRespond = new TriggeredResponses(this.message).shouldRespond() && process.env.PREWRITTEN_MESSAGES != "TRUE"
+    HalService.snarkyResponse(this.content, !!shouldRespond).then(res => {
+      if (res.has_response) {
         this.message.channel.send(res.messages);
       } else {
         new TriggeredResponses(this.message).respond()
