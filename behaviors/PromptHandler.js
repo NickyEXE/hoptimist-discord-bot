@@ -9,16 +9,20 @@ export default class PromptHandler {
   createPrompt = () => {
     const content = this.content.split("!create_prompt ")[1]
     const arr = content.split(":")
-    const name = arr.shift()
-    const prompt = arr.join(":")
-    PromptService.createPrompt(name, prompt).then(res => {
-      if (res.error) {
-        this.message.channel.send(res.error)
-      } else {
-        this.message.channel.send(`Your new prompt ${res.name} has been created and is now the personality of the bot.`)
-        this.message.channel.send(`For a list of personalities and instructions on changing personalities, type !list_personalities`)
-      }
-    })
+    if (arr.length < 2) {
+      this.message.channel.send(`To create a personality, you must use the following format: !create_prompt NAME OF PERSONALITY: DESCRIPTION OF PERSONALITY. Do not forget the colon!`)
+    } else {
+      const name = arr.shift()
+      const prompt = arr.join(":")
+      PromptService.createPrompt(name, prompt).then(res => {
+        if (res.error) {
+          this.message.channel.send(res.error)
+        } else {
+          this.message.channel.send(`Your new prompt ${res.name} has been created and is now the personality of the bot.`)
+          this.message.channel.send(`For a list of personalities and instructions on changing personalities, type !list_personalities`)
+        }
+      })
+    }
   }
 
   listPersonalities = () => {
