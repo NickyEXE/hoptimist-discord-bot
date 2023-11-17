@@ -50,6 +50,12 @@ const messageHandler = (message) => {
     case "create_prompt": {
       new PromptHandler(message).createPrompt();
     }
+    case "list_personalities": {
+      new PromptHandler(message).listPersonalities()
+    }
+    case "set_personality": {
+      new PromptHandler(message).setPersonality()
+    }
   }
 };
 
