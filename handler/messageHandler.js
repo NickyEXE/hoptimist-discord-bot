@@ -46,15 +46,19 @@ const messageHandler = (message) => {
     }
     case "uncancel": {
       new MentionedUserActions(message).selfCancel();
+      break;
     }
     case "create_prompt": {
       new PromptHandler(message).createPrompt();
+      break;
     }
     case "list_personalities": {
-      new PromptHandler(message).listPersonalities()
+      new PromptHandler(message).listPersonalities();
+      break;
     }
     case "set_personality": {
-      new PromptHandler(message).setPersonality()
+      new PromptHandler(message).setPersonality();
+      break;
     }
   }
 };
